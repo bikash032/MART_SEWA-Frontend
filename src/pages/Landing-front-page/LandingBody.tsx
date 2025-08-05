@@ -1,5 +1,5 @@
-import Body1 from "../body/Body1"
-import Body2 from "../body/Body2"
+import Body1 from "./LandingBodyParts/Body1"
+import Body2 from "./LandingBodyParts/Body2"
 
 const LandingBody = () => {
     return (

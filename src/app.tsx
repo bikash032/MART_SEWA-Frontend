@@ -3,13 +3,14 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import "./index.css"
 // Import your navigation component
 
-import LandingBody from "./components/pages/LandingBody/LandingBody"
+import LandingBody from "./pages/Landing-front-page/LandingBody"
+import StickyLandingPageTop from "./pages/Landing-front-page/StickyLandingTopPage"
 
 function App() {
   return (
     <Router>
       {/* Show the navigation menu at the top or sidebar */}
-      {/* <NavigationMenuDemo /> */}
+    <StickyLandingPageTop/>
     <LandingBody/>
       {/* Define your routes below */}
       <Routes>

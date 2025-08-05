@@ -16,7 +16,7 @@ import type { MenuProps } from 'antd';
 import { Breadcrumb, Layout, Menu } from 'antd';
 import { PageTitle } from '@/components/page-title/PageTitle';
 import { NavLink } from 'react-router';
-import BannerList from '../banner/bannerList';
+import BannerList from '../../../pages/banner/bannerList';
 
 const { Content, Sider, Footer } = Layout;
 
@@ -46,7 +46,7 @@ const AdminLayout: React.FC = () => {
   return (
     <div className="min-h-screen w-full flex flex-col bg-gradient-to-b from-cyan-50 to-cyan-800 text-white">
       {/* Header */}
-      <header className="flex flex-col md:flex-row justify-between items-center gap-4 p-4 sm:p-6 bg-cyan-900 shadow-md">
+      <header className="flex flex-col md:flex-row justify-between items-center gap-4 p-4 sm:p-6 bg-gradient-to-r from-cyan-600 to-cyan-800 shadow-md">
         {/* Logo and Title */}
         <div className="flex items-center gap-4">
           <img
@@ -55,7 +55,7 @@ const AdminLayout: React.FC = () => {
             alt="Logo"
           />
           <div>
-            <PageTitle title="MART SEWA" className="!text-white" />
+            <PageTitle title="MART SEWA" className="!text-teal-50" />
             <p className="text-sm text-cyan-100">Connecting Customer with Business</p>
           </div>
         </div>

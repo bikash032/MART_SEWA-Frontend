@@ -14,9 +14,17 @@ export function UserAccount() {
     return (
         <HoverCard>
             <HoverCardTrigger asChild>
-                <Button variant="link"> <div><User />
-                </div>
-                    <div>Login / SignUp</div></Button>
+                <Button variant="link">
+                    <div className=" hover:cursor-pointer">
+                        <div>
+                            <User className="size-7 ml-7" />
+                        </div>
+                        <div className=" hover:text-cyan-700">
+                            Login / SignUp
+                        </div>
+                    </div>
+                </Button>
+
             </HoverCardTrigger>
             <HoverCardContent className="w-80">
                 <div className="flex justify-between gap-4 bg-white">

@@ -5,19 +5,17 @@ import {
 } from "react-router-dom"
 
 
-import LandingBody from "@/components/pages/LandingBody/LandingBody"
-import LoginPage from "@/components/pages/auth/login.page"
-import RegisterPage from "@/components/pages/auth/Register.page"
+import LandingBody from "@/pages/Landing-front-page/LandingBody"
+import LoginPage from "@/pages/auth/login.page"
+import RegisterPage from "@/pages/auth/Register.page"
 import AdminLayout from "@/components/pages/layout/AuthUserLayout"
-import BrandListPage from "@/components/pages/brand/brandListPage"
-
-
+import StickyLandingPageTop from "@/pages/Landing-front-page/StickyLandingTopPage"
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <>
-        {/* <NavigationMenuDemo /> */}
+        <StickyLandingPageTop/>
         <LandingBody />
       </>
     ),
@@ -53,7 +51,7 @@ const router = createBrowserRouter([
     children:[
       {
         path:"brands",
-        element:<BrandListPage/>
+        element:""
       }
     ]
    

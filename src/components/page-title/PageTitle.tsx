@@ -18,7 +18,7 @@ export const PageTitle = (props: Readonly<IPageTitleProps>) => {
 
     return (<>
 
-        <h1 className={`font-extrabold text-4xl text-cyan-600 italic    ${props.title}` }>
+        <h1 className={`font-extrabold text-4xl text-cyan-600 italic ${props.className}   ${props.title}` }>
            
             {props.title}
            
