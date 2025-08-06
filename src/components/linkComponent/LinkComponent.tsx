@@ -8,7 +8,7 @@ export interface ILinkComponents {
 
 }
 
-const LinkComponents = ({ to, className = "", title }: ILinkComponents) => {
+const LinkComponentss = ({ to, className = "", title }: ILinkComponents) => {
 
     return (<>
         <NavLink
@@ -19,4 +19,4 @@ const LinkComponents = ({ to, className = "", title }: ILinkComponents) => {
         </NavLink>
     </>)
 }
-export default LinkComponents
+export default LinkComponentss

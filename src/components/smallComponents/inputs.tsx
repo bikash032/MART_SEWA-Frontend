@@ -11,7 +11,7 @@ interface IFormInput{
     address:string
     phone:string
     gender:GenderEnum
-    don:string
+    dob:string
     image:string
 }
 
@@ -21,6 +21,8 @@ const {control, handleSubmit}=useForm({
     defaultValues:{
         name,
         
+        
+
     }
 })    
     return(<>
