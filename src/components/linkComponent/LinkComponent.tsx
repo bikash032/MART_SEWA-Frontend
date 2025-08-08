@@ -1,14 +1,13 @@
 import { NavLink } from "react-router"
-
-
 export interface ILinkComponents {
     to: string,
     className: string,
     title?: string
+    children?: any
 
 }
 
-const LinkComponentss = ({ to, className = "", title }: ILinkComponents) => {
+const LinkComponentss = ({ to, className = "", title, }: ILinkComponents) => {
 
     return (<>
         <NavLink
@@ -16,6 +15,7 @@ const LinkComponentss = ({ to, className = "", title }: ILinkComponents) => {
             to={to}
             className={className}
         >
+
         </NavLink>
     </>)
 }

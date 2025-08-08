@@ -5,39 +5,29 @@ import LinkComponentss from "@/components/linkComponent/LinkComponent";
 import { PageTitle } from "@/components/page-title/PageTitle";
 import UploadFile from "@/components/smallComponents/uploadFile";
 import { FormInputs } from "@/constant/constant";
+import { NavLink } from "react-router";
+import LeftHandSideOfAuthPage from "./leftHandSideOfAuth";
 
 const LABEL_WIDTH = "w-40"; // 8rem — consistent label width
 
 const RegisterPage = () => {
     return (
         <div className="min-h-screen w-full bg-gradient-to-b from-cyan-600 to-cyan-50 flex flex-col md:flex-row">
-            {/* Sidebar */}
-            <div className="md:w-2/5 w-full bg-gradient-to-b from-cyan-600 to-cyan-50 flex flex-col justify-center items-center p-6">
-                <PageTitle className="text-white text-center" title="Welcome to Mart Sewa!!!" />
-                <p className="italic text-sm text-white mb-4 text-center">
-                    Connect customers online with Market
-                </p>
-                <div className="w-full max-w-sm rounded-xl overflow-hidden shadow-lg">
-                    <img
-                        src="https://www.shutterstock.com/image-photo/online-shopping-ecommerce-technology-internet-260nw-2562256001.jpg"
-                        className="w-full h-60 object-cover"
-                        alt="E-commerce"
-                    />
-                </div>
-            </div>
+            <LeftHandSideOfAuthPage/>
 
             {/* Form Section */}
-            <div className="flex-1 p-6 md:p-10 overflow-auto">
+            <div className="flex-1 pt-20 md:pd-10 overflow-auto">
                 <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-6 md:p-10 border border-cyan-300">
-                    <div className="flex">
-                        <div>
-                            <PageTitle className="text-center mb-6" title="Register New User!" />
+                    <div className="flex flex-row justify-between sm:flex-col md:flex-col lg:flex-row">
+                        <div className="w-5/5 text-end sm:text-start md:text-end lg:text-end">
+                            <PageTitle className="font-semibold not-italic" title="Create an account " />
                         </div>
-                        <div>
-                           <LinkComponentss to="/login" className="text-black" title="hello"></LinkComponentss>
+                        <div className="flex space-x-2 mt-5 w-full justify-end">
+                            <p>Have already an Account?</p>
+                            <NavLink to="/login" ><span className="text-cyan-500 italic hover:underline hover:cursor-pointer hover:text-cyan-600">Sign in now!</span></NavLink>
                         </div>
                     </div>
-                    <form className="space-y-4">
+                    <form className="space-y-4 mt-5">
 
                         {/* User Name */}
                         <div className="flex items-center">
@@ -176,7 +166,7 @@ const RegisterPage = () => {
 
 
                         {/* Submit Button */}
-                        <div className="pt-2 text-center">
+                        <div className=" text-center">
                             <button
                                 type="submit"
                                 className="px-6 py-2 bg-cyan-600 hover:bg-cyan-700 text-white font-semibold rounded-md shadow"
