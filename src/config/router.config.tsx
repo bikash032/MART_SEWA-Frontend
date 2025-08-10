@@ -24,7 +24,7 @@ const router = createBrowserRouter([
     path: "/login",
     element: (
       <>
-        <LoginPage />
+        <LoginPage/>
       </>
     ),
   },
@@ -41,7 +41,7 @@ const router = createBrowserRouter([
     element: (
       <>
 
-        <RegisterPage />
+      <RegisterPage />
       </>
     ),
   },

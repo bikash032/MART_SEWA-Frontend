@@ -1,20 +1,54 @@
 import FormInput from "@/components/form/FormInput";
 import { FormInputProps } from "@/components/form/formLabel";
-import LinkComponentss from "@/components/linkComponent/LinkComponent";
-
 import { PageTitle } from "@/components/page-title/PageTitle";
 import UploadFile from "@/components/smallComponents/uploadFile";
-import { FormInputs } from "@/constant/constant";
+import { FormInputs, GenderEnum, UserRoles } from "@/constant/constant";
 import { NavLink } from "react-router";
 import LeftHandSideOfAuthPage from "./leftHandSideOfAuth";
+import { useForm } from "react-hook-form";
+import { ICreditionals } from "./login.page";
+import { FaPaperPlane } from "react-icons/fa6";
+import { MultipleSelect } from "@/components/form/MultipleSelect";
+import { RadioGroupSelect } from "@/components/form/FormInputsAll";
 
 const LABEL_WIDTH = "w-40"; // 8rem — consistent label width
 
+export interface ICreditionals {
+    email: string | null
+    password: String | null
+    confirmPassword:string | null
+    role:UserRoles | null
+    gender: GenderEnum | null
+    phone:Number | null
+    address:String| null
+    dob:Date | null
+    image:string 
+
+
+}
+
 const RegisterPage = () => {
+    const { handleSubmit, control, formState: { errors } } = useForm({
+        defaultValues: {
+            name: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+            role: "",
+            gender: "",
+            phone: "",
+            address: "",
+            dob: ""
+
+        }
+    })
+    const submitHandle = (data: ICreditionals) => {
+        console.log(data);
+
+    }
     return (
         <div className="min-h-screen w-full bg-gradient-to-b from-cyan-600 to-cyan-50 flex flex-col md:flex-row">
-            <LeftHandSideOfAuthPage/>
-
+            <LeftHandSideOfAuthPage />
             {/* Form Section */}
             <div className="flex-1 pt-20 md:pd-10 overflow-auto">
                 <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-6 md:p-10 border border-cyan-300">
@@ -27,7 +61,9 @@ const RegisterPage = () => {
                             <NavLink to="/login" ><span className="text-cyan-500 italic hover:underline hover:cursor-pointer hover:text-cyan-600">Sign in now!</span></NavLink>
                         </div>
                     </div>
-                    <form className="space-y-4 mt-5">
+                    <form
+                        onSubmit={handleSubmit(submitHandle)}
+                        className="space-y-4 mt-5">
 
                         {/* User Name */}
                         <div className="flex items-center">
@@ -39,6 +75,9 @@ const RegisterPage = () => {
                                 className="w-full"
                                 id="name"
                                 placeholder="Please input your username..."
+                                control={control}
+                                name="name"
+                                errorMsg={errors?.email?.message}
                             />
                         </div>
 
@@ -52,6 +91,9 @@ const RegisterPage = () => {
                                 className="w-full"
                                 id="email"
                                 placeholder="Please input your email..."
+                                control={control}
+                                name="email"
+                                errorMsg={errors?.email?.message}
                             />
                         </div>
 
@@ -65,6 +107,8 @@ const RegisterPage = () => {
                                 className="w-full"
                                 id="password"
                                 placeholder="Please enter your password"
+                                control={control}
+                                name="password"
                             />
                         </div>
 
@@ -78,6 +122,8 @@ const RegisterPage = () => {
                                 className="w-full "
                                 id="confirmPassword"
                                 placeholder="Rewrite your password"
+                                control={control}
+                                name="confirmPassword"
                             />
                         </div>
 
@@ -91,38 +137,35 @@ const RegisterPage = () => {
                                 className="w-full"
                                 id="address"
                                 placeholder="Please enter address"
+                                control={control}
+                                name="address"
                             />
                         </div>
-
                         {/* Role & Phone */}
                         <div className="flex flex-col md:flex-row gap-4 w-full">
-                            {/* Role */}
+                            {/* role */}
                             <div className="flex items-center flex-1 gap-7">
                                 <div className={`${LABEL_WIDTH}`}>
-                                    <FormInputProps label="Role:" htmlFor="role" />
+                                <FormInputProps label="Role:" htmlFor="role" />
                                 </div>
-                                <FormInput
-                                    type={FormInputs.TEXT}
-                                    className="w-full"
-                                    id="role"
-                                    placeholder="Enter role"
-                                />
+                                <MultipleSelect />
                             </div>
 
-                            {/* Phone */}
-                            <div className="flex items-center flex-1 ">
+                            {/* phone */}
+                            <div className="flex items-center flex-1">
                                 <div className={`${LABEL_WIDTH}`}>
-                                    <FormInputProps label="Phone:" htmlFor="phone" />
+                                    <FormInputProps label="phone:" htmlFor="phone" />
                                 </div>
                                 <FormInput
+                                    placeholder="Enter phone number"
                                     type={FormInputs.TEXT}
                                     className="w-full"
                                     id="phone"
-                                    placeholder="Enter phone number"
+                                    control={control}
+                                    name="phone"
                                 />
                             </div>
                         </div>
-
                         {/* Gender & DOB */}
                         <div className="flex flex-col md:flex-row gap-4 w-full">
                             {/* Gender */}
@@ -130,12 +173,9 @@ const RegisterPage = () => {
                                 <div className={`${LABEL_WIDTH}`}>
                                     <FormInputProps label="Gender:" htmlFor="gender" />
                                 </div>
-                                <FormInput
-                                    type={FormInputs.TEXT}
-                                    className="w-full"
-                                    id="gender"
-                                    placeholder="Enter gender"
-                                />
+                                <div className="w-full">
+                                <RadioGroupSelect/>
+                                </div>
                             </div>
 
                             {/* DOB */}
@@ -147,6 +187,8 @@ const RegisterPage = () => {
                                     type={FormInputs.DATE}
                                     className="w-full"
                                     id="dob"
+                                    control={control}
+                                    name="dob"
                                 />
                             </div>
                         </div>
@@ -171,7 +213,14 @@ const RegisterPage = () => {
                                 type="submit"
                                 className="px-6 py-2 bg-cyan-600 hover:bg-cyan-700 text-white font-semibold rounded-md shadow"
                             >
-                                Register
+                                <div className="flex text-center justify-center gap-2">
+                                    <div className="mt-1">
+                                        <FaPaperPlane />
+                                    </div>
+                                    <div>
+                                        Register
+                                    </div>
+                                </div>
                             </button>
                         </div>
                     </form>
