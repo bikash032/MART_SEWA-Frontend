@@ -1,7 +1,8 @@
 import React from "react"
 import { useForm, Controller, SubmitHandler } from "react-hook-form"
 import { Input } from "../ui/input"
-import { Select as ReactSelect } from "react-select"
+// If you're using react-select, import as below:
+import ReactSelect from "react-select"
 import {
   Select,
   SelectContent,
@@ -16,79 +17,55 @@ import {
   RadioGroupItem,
 } from "@/components/ui/radio-group"
 
-// Form Field Components
-
-export interface IFormInputProps {
-  type: string
-  id: string
-  className?: string
-  placeholder?: string
-  control: any
-  name: string
-  errorMsg?: string | null | undefined
-}
-
-export const FormInput = ({
-  type,
-  className = "",
-  id,
-  placeholder = "",
-  control,
-  name,
-  errorMsg = null,
-}: IFormInputProps) => {
-  const { field } = useForm({}).useController ? useForm({}).useController({
-    name,
-    control,
-  }) : { field: {} }
-  return (
-    <div className="flex flex-col w-full mb-2">
-      <Input
-        placeholder={placeholder}
-        type={type}
-        id={id}
-        {...field}
-        className={`w-full rounded border border-cyan-700 shadow-md p-2 ${className}`}
-      />
-      {errorMsg && (
-        <span className="text-sm text-red-600">{errorMsg as string}</span>
-      )}
-    </div>
-  )
-}
-
-export interface ILabelProps {
-  htmlFor?: string
-  className?: string
-  label: React.ReactNode
-}
-
-export const FormInputLabel = ({
-  htmlFor,
-  className = "w-1/3 text-xl font-medium text-cyan-900",
-  label,
-}: ILabelProps) => (
-  <Label htmlFor={htmlFor} className={className}>
-    {label}
-  </Label>
-)
-
-// Custom Select
+// ===== Typed Interfaces =====
 
 interface SelectOption {
   value: string
   label: string
 }
 
-// Multiple Select (your custom select UI)
+interface IMainFormInput {
+  firstName: string
+  lastName: string
+  password: string
+  iceCreamType: SelectOption | null
+  userRole: string
+  gender: string
+}
 
-export function MultipleSelect({ control, name }: { control: any; name: string }) {
+// ===== Field Components =====
+
+// Label Component
+export const FormInputLabel = ({
+  htmlFor,
+  className = "w-1/3 text-xl font-medium text-cyan-900",
+  label,
+}: {
+  htmlFor?: string
+  className?: string
+  label: React.ReactNode
+}) => (
+  <Label htmlFor={htmlFor} className={className}>
+    {label}
+  </Label>
+)
+
+// MultipleSelect - Custom select using shadcn/ui select
+export function MultipleSelect({
+  control,
+  name,
+}: {
+  control: any
+  name: string
+}) {
   return (
     <Controller
       name={name}
       control={control}
+      defaultValue=""
+      rules={{ required: "Role required" }}
       render={({ field }) => (
-        <Select onValueChange={field.onChange} defaultValue={field.value}>
+        <Select onValueChange={field.onChange} value={field.value}>
           <SelectTrigger className="w-full">
             <SelectValue placeholder="Select role" />
           </SelectTrigger>
@@ -105,20 +82,24 @@ export function MultipleSelect({ control, name }: { control: any; name: string }
   )
 }
 
-// Radio Group Select
-
-export function RadioGroupSelect({ control, name }: { control: any; name: string }) {
-
-
-
-    
+export function RadioGroupSelect({
+  control,
+  name,
+}: {
+  control: any
+  name: string
+}) {
   return (
     <Controller
       name={name}
       control={control}
       defaultValue="male"
       render={({ field }) => (
-        <RadioGroup value={field.value} onValueChange={field.onChange} className="flex gap-6 mb-3">
+        <RadioGroup
+          value={field.value}
+          onValueChange={field.onChange}
+          className="flex gap-6 mb-3"
+        >
           <div className="flex gap-3">
             <RadioGroupItem value="male" id="male" />
             <Label htmlFor="male">Male</Label>
@@ -137,8 +118,7 @@ export function RadioGroupSelect({ control, name }: { control: any; name: string
   )
 }
 
-// React-Select with Controller
-
+// RHF-controlled react-select field
 export function ReactSelectField({
   control,
   name,
@@ -154,28 +134,18 @@ export function ReactSelectField({
       control={control}
       render={({ field }) => (
         <ReactSelect
-          {...field}
           options={options}
-          onChange={field.onChange}
           value={field.value}
+          onChange={field.onChange}
         />
       )}
     />
   )
 }
 
-// Form definition
+// ===== Main Form Component =====
 
-interface IMainFormInput {
-  firstName: string
-  lastName: string
-  password: string
-  iceCreamType: SelectOption | null
-  userRole: string
-  gender: string
-}
-
-const iceCreamOptions = [
+const iceCreamOptions: SelectOption[] = [
   { value: "chocolate", label: "Chocolate" },
   { value: "strawberry", label: "Strawberry" },
   { value: "vanilla", label: "Vanilla" },
@@ -277,9 +247,15 @@ export default function AllFieldsOnPage() {
 
       <FormInputLabel label="Role (custom select)" />
       <MultipleSelect control={control} name="userRole" />
+      {errors.userRole && (
+        <span className="text-sm text-red-600">{errors.userRole.message}</span>
+      )}
 
       <FormInputLabel label="Gender (radio group)" />
       <RadioGroupSelect control={control} name="gender" />
+      {errors.gender && (
+        <span className="text-sm text-red-600">{errors.gender.message}</span>
+      )}
 
       <button
         type="submit"

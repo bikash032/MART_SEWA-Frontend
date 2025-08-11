@@ -23,9 +23,7 @@ const FormInput = ({ type, className = "", id, placeholder = "", control, name, 
     name: name,
     control: control,
   })
-
   return (<div className="flex flex-col w-full">
-
  <Input
       placeholder={placeholder}
       type={type}
@@ -34,7 +32,6 @@ const FormInput = ({ type, className = "", id, placeholder = "", control, name, 
       className={`w-full rounded border border-cyan-700 shadow-md p-2 ${className}`}
     >
     </Input>
-
    {
     errorMsg?  <span className={`text-sm text-red-600`}>
     {errorMsg as string}
@@ -42,5 +39,4 @@ const FormInput = ({ type, className = "", id, placeholder = "", control, name, 
    }
   </div>)
 }
-
 export default FormInput

@@ -6,27 +6,14 @@ import { FormInputs, GenderEnum, UserRoles } from "@/constant/constant";
 import { NavLink } from "react-router";
 import LeftHandSideOfAuthPage from "./leftHandSideOfAuth";
 import { useForm } from "react-hook-form";
-import { ICreditionals } from "./login.page";
 import { FaPaperPlane } from "react-icons/fa6";
 import { MultipleSelect } from "@/components/form/MultipleSelect";
 import { RadioGroupSelect } from "@/components/form/FormInputsAll";
+import { RegisterDTO, type IRegisterData } from "@/contract/auth.contract";
+import { yupResolver } from "@hookform/resolvers/yup";
+import axiosInstance from "@/config/axios.config";
 
 const LABEL_WIDTH = "w-40"; // 8rem — consistent label width
-
-export interface ICreditionals {
-    email: string | null
-    password: String | null
-    confirmPassword:string | null
-    role:UserRoles | null
-    gender: GenderEnum | null
-    phone:Number | null
-    address:String| null
-    dob:Date | null
-    image:string 
-
-
-}
-
 const RegisterPage = () => {
     const { handleSubmit, control, formState: { errors } } = useForm({
         defaultValues: {
@@ -34,29 +21,64 @@ const RegisterPage = () => {
             email: "",
             password: "",
             confirmPassword: "",
-            role: "",
-            gender: "",
+            role: UserRoles.CUSTOMER,
+            gender: GenderEnum.MALE,
             phone: "",
             address: "",
-            dob: ""
+            dob: "",
+            image: ""
+
+        },
+        resolver: yupResolver(RegisterDTO)
+
+    })
+    const submitHandle = async (data: IRegisterData) => {
+        console.log("submit data", data);
+
+        const formData = new FormData();
+
+        formData.append("name", data.name);
+        formData.append("email", data.email);
+        formData.append("password", data.password);
+        formData.append("confirmPassword", data.confirmPassword);
+        formData.append("role", data.role);
+        formData.append("gender", data.gender);
+        formData.append("phone", data.phone || "");
+        formData.append("address", data.address || "");
+        formData.append("dob", data.dob || "");
+
+        // Append image only if it exists
+        if (data.image && data.image instanceof File) {
+            formData.append("image", data.image);
+        }
+
+
+
+        try {
+            const response = await axiosInstance.post("auth/register", data, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            })
+            console.log("hello for the response from Response", response);
+
+        } catch (exception) {
+            console.log("exception from the axios section", exception);
 
         }
-    })
-    const submitHandle = (data: ICreditionals) => {
-        console.log(data);
 
     }
     return (
-        <div className="min-h-screen w-full bg-gradient-to-b from-cyan-600 to-cyan-50 flex flex-col md:flex-row">
+        <div className="min-h-screen w-full  flex flex-col md:flex-row">
             <LeftHandSideOfAuthPage />
             {/* Form Section */}
-            <div className="flex-1 pt-20 md:pd-10 overflow-auto">
-                <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-6 md:p-10 border border-cyan-300">
-                    <div className="flex flex-row justify-between sm:flex-col md:flex-col lg:flex-row">
-                        <div className="w-5/5 text-end sm:text-start md:text-end lg:text-end">
-                            <PageTitle className="font-semibold not-italic" title="Create an account " />
+            <div className="flex-1 pt-8 md:pd-10 overflow-auto">
+                <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-5 md:p-10 ">
+                    <div className="flex flex-row justify-between sm:flex-col md:flex-col lg:flex-row border-b-2 border-black/30">
+                        <div className="w-5/5 ">
+                            <PageTitle className="font-semibold not-italic" title="Create an Account " />
                         </div>
-                        <div className="flex space-x-2 mt-5 w-full justify-end">
+                        <div className="flex space-x-2 mt-5 w-full justify-end ">
                             <p>Have already an Account?</p>
                             <NavLink to="/login" ><span className="text-cyan-500 italic hover:underline hover:cursor-pointer hover:text-cyan-600">Sign in now!</span></NavLink>
                         </div>
@@ -64,7 +86,6 @@ const RegisterPage = () => {
                     <form
                         onSubmit={handleSubmit(submitHandle)}
                         className="space-y-4 mt-5">
-
                         {/* User Name */}
                         <div className="flex items-center">
                             <div className={`${LABEL_WIDTH}`}>
@@ -77,10 +98,9 @@ const RegisterPage = () => {
                                 placeholder="Please input your username..."
                                 control={control}
                                 name="name"
-                                errorMsg={errors?.email?.message}
+                                errorMsg={errors?.name?.message}
                             />
                         </div>
-
                         {/* Email */}
                         <div className="flex items-center">
                             <div className={`${LABEL_WIDTH}`}>
@@ -96,7 +116,6 @@ const RegisterPage = () => {
                                 errorMsg={errors?.email?.message}
                             />
                         </div>
-
                         {/* Password */}
                         <div className="flex items-center">
                             <div className={`${LABEL_WIDTH}`}>
@@ -109,9 +128,9 @@ const RegisterPage = () => {
                                 placeholder="Please enter your password"
                                 control={control}
                                 name="password"
+                                errorMsg={errors?.password?.message}
                             />
                         </div>
-
                         {/* Confirm Password */}
                         <div className="flex items-center">
                             <div className={`${LABEL_WIDTH}`}>
@@ -124,9 +143,9 @@ const RegisterPage = () => {
                                 placeholder="Rewrite your password"
                                 control={control}
                                 name="confirmPassword"
+                                errorMsg={errors?.confirmPassword?.message}
                             />
                         </div>
-
                         {/* Address */}
                         <div className="flex items-center">
                             <div className={`${LABEL_WIDTH}`}>
@@ -139,6 +158,7 @@ const RegisterPage = () => {
                                 placeholder="Please enter address"
                                 control={control}
                                 name="address"
+                                errorMsg={errors?.address?.message}
                             />
                         </div>
                         {/* Role & Phone */}
@@ -146,11 +166,10 @@ const RegisterPage = () => {
                             {/* role */}
                             <div className="flex items-center flex-1 gap-7">
                                 <div className={`${LABEL_WIDTH}`}>
-                                <FormInputProps label="Role:" htmlFor="role" />
+                                    <FormInputProps label="Role:" htmlFor="role" />
                                 </div>
                                 <MultipleSelect />
                             </div>
-
                             {/* phone */}
                             <div className="flex items-center flex-1">
                                 <div className={`${LABEL_WIDTH}`}>
@@ -170,17 +189,19 @@ const RegisterPage = () => {
                         <div className="flex flex-col md:flex-row gap-4 w-full">
                             {/* Gender */}
                             <div className="flex items-center flex-1 gap-7">
-                                <div className={`${LABEL_WIDTH}`}>
+                                <div className={`${LABEL_WIDTH} `}>
                                     <FormInputProps label="Gender:" htmlFor="gender" />
                                 </div>
-                                <div className="w-full">
-                                <RadioGroupSelect/>
+                                <div className="w-full ">
+                                    <RadioGroupSelect
+                                        control={control}
+                                        name="gender"
+                                    />
                                 </div>
                             </div>
-
                             {/* DOB */}
                             <div className="flex items-center flex-1">
-                                <div className={`${LABEL_WIDTH}`}>
+                                <div className={`${LABEL_WIDTH} text-start justify-start`}>
                                     <FormInputProps label="DOB:" htmlFor="dob" />
                                 </div>
                                 <FormInput
@@ -189,10 +210,10 @@ const RegisterPage = () => {
                                     id="dob"
                                     control={control}
                                     name="dob"
+                                    errorMsg={errors?.dob?.message}
                                 />
                             </div>
                         </div>
-
                         {/* Image URL */}
                         <div className="flex flex-col md:flex-row md:items-start w-full">
                             <div className={`${LABEL_WIDTH}`}>
@@ -200,13 +221,13 @@ const RegisterPage = () => {
                             </div>
                             <div className="w-full ">
                                 <div className="max-w-sm h-27 overflow-hidden flex" >
-                                    <UploadFile />
+                                    <UploadFile
+
+
+                                    />
                                 </div>
                             </div>
                         </div>
-
-
-
                         {/* Submit Button */}
                         <div className=" text-center">
                             <button
@@ -229,5 +250,4 @@ const RegisterPage = () => {
         </div>
     );
 };
-
 export default RegisterPage;

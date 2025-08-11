@@ -7,23 +7,17 @@ import { FormInputProps } from "@/components/form/formLabel"
 import { FormInputs } from "@/constant/constant"
 import FormInput from "@/components/form/FormInput";
 import { useForm } from "react-hook-form"
-import * as Yup from "yup"
-import { yupResolver } from "@hookform/resolvers/yup"
 
+import { yupResolver } from "@hookform/resolvers/yup"
+import { CreditionalDTO, type ICreditionals } from "@/contract/auth.contract"
+import FooterForAuth from "@/components/form/footerAuth"
+import { date } from "yup"
 
 const LABEL_WIDTH = "w-65"
 
-export interface ICreditionals {
-    email: string | null
-    password: String | null
 
 
-}
 
-const CreditionalDTO = Yup.object({
-    email: Yup.string().email().required(),
-    password: Yup.string().min(5).required()
-})
 const LoginPage = () => {
     const { handleSubmit, control, formState: { errors } } = useForm({
         defaultValues: {
@@ -38,11 +32,11 @@ const LoginPage = () => {
     }
     console.log(errors)
     return <>
-        <div className="min-h-screen w-full bg-gradient-to-b from-cyan-600 to-cyan-50 flex flex-col md:flex-row">
+        <div className="min-h-screen w-full  flex flex-col md:flex-row">
             <LeftHandSideOfAuthPage />
-            <div className="flex-1 pt-20 md:pd-10 overflow-auto">
-                <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-6 md:p-10 border border-cyan-300">
-                    <div className="flex flex-row justify-between sm:flex-col md:flex-col lg:flex-row mr-15">
+            <div className="flex-1  pt-40 md:pd-10 overflow-auto">
+                <div className="max-w-4xl mx-auto bg-white  p-6 md:p-10">
+                    <div className="flex flex-row justify-between sm:flex-col md:flex-col lg:flex-row mr-15 border-b-2 border-black/20  ">
                         <div className="flex flex-row justify-between sm:flex-col md:flex-col lg:flex-row">
                             <PageTitle className="font-semibold not-italic" title="Login" />
                         </div>
@@ -69,12 +63,15 @@ const LoginPage = () => {
                         </div>
                         <div className="flex flex-col">
                             <label htmlFor="password" className="flex flex-row " >
-                                <FormInputProps label="Password:" htmlFor="password" />
+                                <div className={`${LABEL_WIDTH}`}>
+
+                                    <FormInputProps label="Password:" htmlFor="password" />
+                                </div>
                                 <FormInput
                                     type={FormInputs.PASSWORD}
                                     placeholder="Enter your Password..."
                                     id="password"
-                                    className="mt-0.5 rounded border-gray-300 shadow-sm  w-full p-1.5 border focus:border-cyan-600"
+                                    className="w-full"
                                     control={control}
                                     name="password"
                                     errorMsg={errors?.password?.message}
@@ -84,7 +81,7 @@ const LoginPage = () => {
                                 <NavLink to="/forget-password"><span className="text-cyan-500 italic hover:cursor-pointer hover:underline">Forget Password</span></NavLink>
                             </div>
                         </div>
-                        <div className=" ml-45 flex flex-row">
+                        <div className=" ml-48 flex flex-row">
                             <button className="bg-red-600  rounded w-1/2   focus:border-cyan-700 p-2 hover:bg-red-700 hover:cursor-pointer font-medium text-white flex gap-2 items-center justify-center">
                                 <div>
                                     <TrashIcon />
@@ -103,7 +100,9 @@ const LoginPage = () => {
                             </button>
                         </div>
                     </form>
+                    
                 </div>
+              
             </div>
 
         </div>

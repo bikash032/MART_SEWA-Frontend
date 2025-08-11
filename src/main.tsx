@@ -8,10 +8,6 @@ import RouterConfig from './config/router.config'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-
-
     <RouterConfig/>
-
   </StrictMode>,
-  
 )

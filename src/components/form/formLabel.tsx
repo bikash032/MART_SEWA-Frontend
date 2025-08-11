@@ -8,7 +8,7 @@ export interface IFormInputprops {
 }
 
 
-export const FormInputProps = ({ htmlFor, className = "w-1/3 text-xl font-medium text-cyan-900 ", label }: IFormInputprops) => {
+export const FormInputProps = ({ htmlFor, className = "w-full sm:w-1/2 lg:w-1/3 text-base sm:text-lg lg:text-xl font-medium text-cyan-900 ", label }: IFormInputprops) => {
     return (<>
         <Label
             htmlFor={htmlFor}
