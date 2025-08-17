@@ -8,9 +8,9 @@ const LeftHandSideOfAuthPage = () => {
             <div className=" w-40 h-40">
                 <img className="rounded-full" src="https://thumbs.dreamstime.com/b/letter-ms-logotype-design-company-name-colored-blue-swoosh-vector-logo-business-identity-203870151.jpg" alt="" />
             </div>
-            <PageTitle className="text-white text-center" title="Welcome to Mart Sewa!!!" />
+            <PageTitle className="text-white text-center" title="Welcome to Pathivara Dental Clinic !!!" />
             <p className="italic text-sm text-white mb-4 text-center">
-                Connect customers online with Market
+            Your Smile is our Promise!!!
             </p>
             <div className="w-full  rounded-xl overflow-hidden shadow-lg">
                 <img
@@ -20,7 +20,7 @@ const LeftHandSideOfAuthPage = () => {
                 />
             </div>
             <FormPageText
-                title={["⚡ Welocome !!!", "✨MART SEWA!", "🔥 Wow!"]}
+                title={["⚡ Welocome !!!", "✨Pathivera Dental clinic!", "🔥 Wow!"]}
                 className="text-yellow-400"
             />
 

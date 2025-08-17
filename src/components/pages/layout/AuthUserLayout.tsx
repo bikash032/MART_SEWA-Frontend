@@ -55,7 +55,7 @@ const AdminLayout: React.FC = () => {
             alt="Logo"
           />
           <div>
-            <PageTitle title="MART SEWA" className="!text-teal-50" />
+            <PageTitle title="Pathivara Dental Clinic" className="!text-teal-50" />
             <p className="text-sm text-cyan-100">Connecting Customer with Business</p>
           </div>
         </div>

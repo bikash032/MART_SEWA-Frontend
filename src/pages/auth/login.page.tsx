@@ -10,16 +10,13 @@ import { useForm } from "react-hook-form"
 
 import { yupResolver } from "@hookform/resolvers/yup"
 import { CreditionalDTO, type ICreditionals } from "@/contract/auth.contract"
-import { useAuth } from "@/context/auth.context"
-import baseServices from "@/services/base.services"
+import { useAuth } from "@/hooks/auth.hooks"
 
 const LABEL_WIDTH = "w-65"
 
-
-
-
 const LoginPage = () => {
-const { login } = useAuth()
+    const {login}=useAuth()
+
     const { handleSubmit, control, formState: { errors } } = useForm({
         defaultValues: {
             email: "",
@@ -29,7 +26,8 @@ const { login } = useAuth()
     })
     const submitHandle = async (data: ICreditionals) => {
         try {
-            await login(data)
+            // trigger hook
+          await  login(data)
         } catch (exception) {
             throw exception
         }
