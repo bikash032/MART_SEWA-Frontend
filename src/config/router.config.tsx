@@ -10,7 +10,17 @@ import LoginPage from "@/pages/auth/login.page"
 import RegisterPage from "@/pages/auth/Register.page"
 import AdminLayout from "@/components/pages/layout/AuthUserLayout"
 import StickyLandingPageTop from "@/pages/Landing-front-page/StickyLandingTopPage"
+import { Toaster } from "sonner"
+import { ActivationPendingPage } from "@/pages/auth/activation-account"
 const router = createBrowserRouter([
+  {
+path:"/account-activation",
+element:(
+  <>
+  <ActivationPendingPage/>
+  </>
+)
+  },
   {
     path: "/",
     element: (
@@ -59,5 +69,8 @@ const router = createBrowserRouter([
 ])
 
 export default function RouterConfig() {
-  return <RouterProvider router={router} />
+  return(<>
+  <Toaster/>
+  <RouterProvider router={router} />
+  </>) 
 }

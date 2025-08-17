@@ -9,6 +9,7 @@ import StickyLandingPageTop from "./pages/Landing-front-page/StickyLandingTopPag
 function App() {
   return (
     <Router>
+      
       {/* Show the navigation menu at the top or sidebar */}
     <StickyLandingPageTop/>
     <LandingBody/>

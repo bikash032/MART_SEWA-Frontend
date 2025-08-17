@@ -10,8 +10,8 @@ import { useForm } from "react-hook-form"
 
 import { yupResolver } from "@hookform/resolvers/yup"
 import { CreditionalDTO, type ICreditionals } from "@/contract/auth.contract"
-import FooterForAuth from "@/components/form/footerAuth"
-import { date } from "yup"
+import { useAuth } from "@/context/auth.context"
+import baseServices from "@/services/base.services"
 
 const LABEL_WIDTH = "w-65"
 
@@ -19,6 +19,7 @@ const LABEL_WIDTH = "w-65"
 
 
 const LoginPage = () => {
+const { login } = useAuth()
     const { handleSubmit, control, formState: { errors } } = useForm({
         defaultValues: {
             email: "",
@@ -26,11 +27,13 @@ const LoginPage = () => {
         },
         resolver: yupResolver(CreditionalDTO)
     })
-    const submitHandle = (data: ICreditionals) => {
-        console.log(data);
-
+    const submitHandle = async (data: ICreditionals) => {
+        try {
+            await login(data)
+        } catch (exception) {
+            throw exception
+        }
     }
-    console.log(errors)
     return <>
         <div className="min-h-screen w-full  flex flex-col md:flex-row">
             <LeftHandSideOfAuthPage />
@@ -100,9 +103,9 @@ const LoginPage = () => {
                             </button>
                         </div>
                     </form>
-                    
+
                 </div>
-              
+
             </div>
 
         </div>

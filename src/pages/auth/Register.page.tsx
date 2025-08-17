@@ -3,7 +3,7 @@ import { FormInputProps } from "@/components/form/formLabel";
 import { PageTitle } from "@/components/page-title/PageTitle";
 import UploadFile from "@/components/smallComponents/uploadFile";
 import { FormInputs, GenderEnum, UserRoles } from "@/constant/constant";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import LeftHandSideOfAuthPage from "./leftHandSideOfAuth";
 import { useForm } from "react-hook-form";
 import { FaPaperPlane } from "react-icons/fa6";
@@ -11,7 +11,8 @@ import { MultipleSelect } from "@/components/form/MultipleSelect";
 import { RadioGroupSelect } from "@/components/form/FormInputsAll";
 import { RegisterDTO, type IRegisterData } from "@/contract/auth.contract";
 import { yupResolver } from "@hookform/resolvers/yup";
-import axiosInstance from "@/config/axios.config";
+import baseServices from "@/services/base.services";
+import { toast } from "sonner";
 
 const LABEL_WIDTH = "w-40"; // 8rem — consistent label width
 const RegisterPage = () => {
@@ -32,9 +33,10 @@ const RegisterPage = () => {
         resolver: yupResolver(RegisterDTO)
 
     })
+    const navigate=useNavigate()
+
     const submitHandle = async (data: IRegisterData) => {
         console.log("submit data", data);
-
         const formData = new FormData();
 
         formData.append("name", data.name);
@@ -50,19 +52,14 @@ const RegisterPage = () => {
         // Append image only if it exists
         if (data.image && data.image instanceof File) {
             formData.append("image", data.image);
-        }
-
-
-
+        } 
         try {
-            const response = await axiosInstance.post("auth/register", data, {
-                headers: {
-                    "Content-Type": "multipart/form-data"
-                }
-            })
+            const response = await baseServices.postRequest("auth/register",data,{hasFile:true})
             console.log("hello for the response from Response", response);
-
+            toast.success("Email verification",{description:"Please check your email and click link to activate account"})
+            navigate("/account-activation")
         } catch (exception) {
+            toast.error("Account not Registered!!!",{description:`${data.email} is already used!`})
             console.log("exception from the axios section", exception);
 
         }
