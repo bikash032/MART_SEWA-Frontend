@@ -20,18 +20,24 @@ class BaseServices {
         if (config.headers) {
             this.headers = {
                 ...this.headers,
-                headers: { ...config.headers }
+                headers: {
+                    ...this.headers.headers,   // keep existing headers
+                    "Content-Type":"application/json"
+                
+                }
             }
         }
+        
         if (config.hasFile) {
             this.headers = {
                 ...this.headers,
                 headers: {
-                    headers: { ...this.headers.headers },
+                    ...this.headers.headers,
                     "Content-Type": "multipart/form-data"
                 }
             }
         }
+
     }
     async getRequest(url: string, config: IConfigProps = {}) {
         this.setHeaders(config)
@@ -40,11 +46,7 @@ class BaseServices {
     }
     async postRequest(url: string, data: any = {}, config: IConfigProps = {}) {
         this.setHeaders(config)
-        console.log("This is data form base service for login time",data);
-        console.log("This is url form base service for login time",url);
-        
-        
-        return await axiosInstance.post(url, data,)
+        return await axiosInstance.post(url, data, this.headers)
     }
 
     async putRequest(url: string, data: any = {}, config: IConfigProps = {}) {

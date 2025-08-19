@@ -1,6 +1,6 @@
 import LeftHandSideOfAuthPage from "./leftHandSideOfAuth"
 import { PageTitle } from "@/components/page-title/PageTitle"
-import { NavLink } from "react-router"
+import { NavLink, useNavigate } from "react-router"
 import { TrashIcon } from "lucide-react"
 import { FaPaperPlane } from "react-icons/fa6"
 import { FormInputProps } from "@/components/form/formLabel"
@@ -11,15 +11,10 @@ import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { CreditionalDTO, type ICreditionals } from "@/contract/auth.contract"
 import { useAuth } from "@/context/auth.context"
-import baseServices from "@/services/base.services"
-
-const LABEL_WIDTH = "w-65"
-
-
-
-
+import { toast } from "sonner"
+const LABEL_WIDTH = "w-[260px]"
 const LoginPage = () => {
-const { login } = useAuth()
+    const { login } = useAuth()
     const { handleSubmit, control, formState: { errors } } = useForm({
         defaultValues: {
             email: "",
@@ -27,9 +22,13 @@ const { login } = useAuth()
         },
         resolver: yupResolver(CreditionalDTO)
     })
+    const navigate = useNavigate()
     const submitHandle = async (data: ICreditionals) => {
         try {
             await login(data)
+            
+         
+
         } catch (exception) {
             throw exception
         }

@@ -1,12 +1,11 @@
 import { FormPageText } from "@/components/form/BlinkingText"
 import { PageTitle } from "@/components/page-title/PageTitle"
-import Image from "../../../public/Blue Tosca Simple Tooth Logo.png"
 const LeftHandSideOfAuthPage = () => {
-    return <>
+    return <> 
         {/* Sidebar */}
         <div className="md:w-2/5 w-full bg-gradient-to-b from-cyan-600 to-cyan-50 flex flex-col justify-center items-center p-6">
             <div className=" w-40 h-40">
-                <img className="rounded-full" src={Image} alt="" />
+                <img className="rounded-full" src="https://thumbs.dreamstime.com/b/letter-ms-logotype-design-company-name-colored-blue-swoosh-vector-logo-business-identity-203870151.jpg" alt="" />
             </div>
             <PageTitle className="text-white text-center" title="Welcome to Mart Sewa" />
             <p className="italic text-sm text-white mb-4 text-center">
@@ -27,4 +26,4 @@ const LeftHandSideOfAuthPage = () => {
     </>
 }
 
-export default LeftHandSideOfAuthPage
+export default LeftHandSideOfAuthPage 

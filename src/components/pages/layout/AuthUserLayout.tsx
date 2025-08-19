@@ -48,17 +48,22 @@ const AdminLayout: React.FC = () => {
       {/* Header */}
       <header className="flex flex-col md:flex-row justify-between items-center gap-4 p-4 sm:p-6 bg-gradient-to-r from-cyan-600 to-cyan-800 shadow-md">
         {/* Logo and Title */}
+        <NavLink to="/">
         <div className="flex items-center gap-4">
+          <NavLink to="/">
           <img
             className="rounded-full w-16 h-16"
             src="https://thumbs.dreamstime.com/b/letter-ms-logotype-design-company-name-colored-blue-swoosh-vector-logo-business-identity-203870151.jpg"
             alt="Logo"
           />
+          </NavLink>
           <div>
+        
             <PageTitle title="MART SEWA" className="!text-teal-50" />
             <p className="text-sm text-cyan-100">Connecting Customer with Business</p>
           </div>
         </div>
+        </NavLink>
 
         {/* Admin Info */}
         <div className="flex items-center gap-3">

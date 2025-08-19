@@ -1,6 +1,19 @@
 import { GenderEnum, UserRoles } from "@/constant/constant"
 import * as Yup from "yup"
 
+
+
+export interface IUserProfile{
+    _id: string
+    name: string
+    email: string
+    role: string
+    gender: string
+    phone?: string
+    address?: string
+    dob?: string
+    image?: any
+}
 export interface IRegisterData {
     name: string
     email: string

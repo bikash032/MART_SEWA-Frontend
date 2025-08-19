@@ -5,9 +5,8 @@ const axiosInstance = axios.create({
     timeout: 10000,
     timeoutErrorMessage: "Request timed out.....",
     responseType: "json",
-    headers: { "Content-Type": "multipart/form-data" }
+    headers: { "Content-Type": "application/json"}
 })
-
 // interceptors
 // TODO: Request interceptors
 // TODO: Custom response type
