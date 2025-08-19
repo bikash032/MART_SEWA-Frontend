@@ -48,12 +48,8 @@ class BaseServices {
         console.log("this is config",config);
         
         this.setHeaders(config)
-<<<<<<< HEAD
-        return await axiosInstance.post(url, data, this.headers)
-=======
         console.log("This is data form base service for login time",data);
         return await axiosInstance.post(url, data,)
->>>>>>> 31eee3d90fa6e6983779154213d9a597b2d5a4d4
     }
 
     async putRequest(url: string, data: any = {}, config: IConfigProps = {}) {

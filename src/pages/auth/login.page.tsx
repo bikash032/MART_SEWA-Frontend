@@ -10,13 +10,6 @@ import { useForm } from "react-hook-form"
 
 import { yupResolver } from "@hookform/resolvers/yup"
 import { CreditionalDTO, type ICreditionals } from "@/contract/auth.contract"
-<<<<<<< HEAD
-import { useAuth } from "@/context/auth.context"
-import { toast } from "sonner"
-const LABEL_WIDTH = "w-[260px]"
-const LoginPage = () => {
-    const { login } = useAuth()
-=======
 import { useAuth } from "@/hooks/auth.hooks"
 
 const LABEL_WIDTH = "w-65"
@@ -24,7 +17,6 @@ const LABEL_WIDTH = "w-65"
 const LoginPage = () => {
     const {login}=useAuth()
 
->>>>>>> 31eee3d90fa6e6983779154213d9a597b2d5a4d4
     const { handleSubmit, control, formState: { errors } } = useForm({
         defaultValues: {
             email: "",
@@ -35,15 +27,8 @@ const LoginPage = () => {
     const navigate = useNavigate()
     const submitHandle = async (data: ICreditionals) => {
         try {
-<<<<<<< HEAD
-            await login(data)
-            
-         
-
-=======
             // trigger hook
           await  login(data)
->>>>>>> 31eee3d90fa6e6983779154213d9a597b2d5a4d4
         } catch (exception) {
             throw exception
         }
