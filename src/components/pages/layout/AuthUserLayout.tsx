@@ -58,8 +58,12 @@ const AdminLayout: React.FC = () => {
           />
           </NavLink>
           <div>
+<<<<<<< HEAD
         
             <PageTitle title="MART SEWA" className="!text-teal-50" />
+=======
+            <PageTitle title="Pathivara Dental Clinic" className="!text-teal-50" />
+>>>>>>> 31eee3d90fa6e6983779154213d9a597b2d5a4d4
             <p className="text-sm text-cyan-100">Connecting Customer with Business</p>
           </div>
         </div>

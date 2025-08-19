@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { ICreditionals, IUserProfile } from "@/contract/auth.contract";
 import baseServices from "@/services/base.services";
 import { getCookie, setCookie, setLocalStorage } from "@/utilities/helpers";
@@ -51,3 +52,16 @@ export const useAuth: any = () => {
     }
 
 }
+=======
+import { createContext } from "react";
+
+interface IAuthContext {
+  login: (data: any) => void; // better to use ICreditionals here if shared
+  loggedInUser: any | null;  // replace `any` with your User type
+}
+
+export const AuthContext = createContext<IAuthContext>({
+  login: () => {},
+  loggedInUser: null,
+});
+>>>>>>> 31eee3d90fa6e6983779154213d9a597b2d5a4d4
