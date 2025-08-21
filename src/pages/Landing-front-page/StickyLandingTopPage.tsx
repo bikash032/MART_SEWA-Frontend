@@ -9,10 +9,10 @@ const StickyLandingPageTop = () => {
     return (<>
         <div className="flex ">
 
-            <img className="h-20" src="" alt="" />
+            <img className="h-20" src="https://thumbs.dreamstime.com/b/letter-ms-logotype-design-company-name-colored-blue-swoosh-vector-logo-business-identity-203870151.jpg" alt="" />
 
             <div className="w-2/11  mt-5">
-                <PageTitle className="" title="Pathivara Dental Clinic"></PageTitle>
+                <PageTitle className="" title="MART SEWA"></PageTitle>
                 <p className="opac font-extralight">Smile till the teeth alive</p>
             </div>
             <SearchBox />

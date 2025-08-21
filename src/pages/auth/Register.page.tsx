@@ -165,7 +165,7 @@ const RegisterPage = () => {
                                 <div className={`${LABEL_WIDTH}`}>
                                     <FormInputProps label="Role:" htmlFor="role" />
                                 </div>
-                                <MultipleSelect />
+                                <MultipleSelect/>
                             </div>
                             {/* phone */}
                             <div className="flex items-center flex-1">

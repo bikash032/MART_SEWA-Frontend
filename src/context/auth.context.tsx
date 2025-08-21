@@ -1,3 +1,4 @@
+import { ICreditionals, IUserProfile } from "@/contract/auth.contract";
 import { createContext } from "react";
 
 interface IAuthContext {
@@ -6,6 +7,6 @@ interface IAuthContext {
 }
 
 export const AuthContext = createContext<IAuthContext>({
-  login: () => {},
-  loggedInUser: null,
+  login:async (data:ICreditionals):Promise<IUserProfile | undefined> =>{return},
+  loggedInUser: {} as IUserProfile | null,
 });

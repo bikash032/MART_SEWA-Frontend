@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import {
   Monitor,
   LayoutDashboardIcon,
@@ -17,6 +18,7 @@ import { Breadcrumb, Layout, Menu } from 'antd';
 import { PageTitle } from '@/components/page-title/PageTitle';
 import { NavLink } from 'react-router';
 import BannerList from '../../../pages/banner/bannerList';
+import { useAuth } from '@/hooks/auth.hooks';
 
 const { Content, Sider, Footer } = Layout;
 
@@ -41,7 +43,9 @@ const items: MenuItem[] = [
 ];
 
 const AdminLayout: React.FC = () => {
+  const { loggedInUser } = useAuth()
   const [collapsed, setCollapsed] = useState(false);
+  console.log("Hello there", loggedInUser);
 
   return (
     <div className="min-h-screen w-full flex flex-col bg-gradient-to-b from-cyan-50 to-cyan-800 text-white">
@@ -49,19 +53,19 @@ const AdminLayout: React.FC = () => {
       <header className="flex flex-col md:flex-row justify-between items-center gap-4 p-4 sm:p-6 bg-gradient-to-r from-cyan-600 to-cyan-800 shadow-md">
         {/* Logo and Title */}
         <NavLink to="/">
-        <div className="flex items-center gap-4">
-          <NavLink to="/">
-          <img
-            className="rounded-full w-16 h-16"
-            src="https://thumbs.dreamstime.com/b/letter-ms-logotype-design-company-name-colored-blue-swoosh-vector-logo-business-identity-203870151.jpg"
-            alt="Logo"
-          />
-          </NavLink>
-          <div>
-            <PageTitle title="Pathivara Dental Clinic" className="!text-teal-50" />
-            <p className="text-sm text-cyan-100">Connecting Customer with Business</p>
+          <div className="flex items-center gap-4">
+            <NavLink to="/">
+              <img
+                className="rounded-full w-16 h-16"
+                src="https://thumbs.dreamstime.com/b/letter-ms-logotype-design-company-name-colored-blue-swoosh-vector-logo-business-identity-203870151.jpg"
+                alt="Logo"
+              />
+            </NavLink>
+            <div>
+              <PageTitle title="Pathivara Dental Clinic" className="!text-teal-50" />
+              <p className="text-sm text-cyan-100">Connecting Customer with Business</p>
+            </div>
           </div>
-        </div>
         </NavLink>
 
         {/* Admin Info */}
@@ -70,9 +74,11 @@ const AdminLayout: React.FC = () => {
             <p className="text-xs font-bold text-white italic">Welcome Admin !!!</p>
             <p className="text-sm font-bold text-white italic">Bikash Bishokarma</p>
           </div>
+
+
           <img
             className="rounded-full w-12 h-12 border-2 border-white"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMG3rEc9cD8zJ8fu7z1YcyaHcVm2qX8di1hA&s"
+            src=""
             alt="Admin"
           />
         </div>
@@ -98,7 +104,7 @@ const AdminLayout: React.FC = () => {
         </Sider>
 
         {/* Main Content */}
-        <BannerList/>
+        <BannerList />
       </div>
     </div>
   );

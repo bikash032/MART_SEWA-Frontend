@@ -14,7 +14,9 @@ class BaseServices {
         if (config.params) {
             this.headers = {
                 ...this.headers,
-                params: { ...config.params }
+                params: { ...config.params ,
+                    "Content-Type":"application/json"
+                }
             }
         }
         if (config.headers) {

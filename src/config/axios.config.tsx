@@ -1,3 +1,4 @@
+import { getLocalStorage } from "@/utilities/helpers"
 import axios from "axios"
 
 const axiosInstance = axios.create({
@@ -8,6 +9,14 @@ const axiosInstance = axios.create({
     headers: { "Content-Type": "application/json"}
 })
 // interceptors
+axiosInstance.interceptors.request.use((config)=>{
+   if(getLocalStorage("_at_46")){
+    config["headers"]["Authorization"]="Bearer"+getLocalStorage("_at_46")
+   }
+    return config
+})
+
+
 // TODO: Request interceptors
 // TODO: Custom response type
 

@@ -36,7 +36,7 @@ export function setLocalStorage<T>(name: string, value: T) {
 export function getLocalStorage<T>(name: string):T | null {
     let result= localStorage.getItem(decodeURIComponent(name))
     return result?JSON.parse(result) as T :null
-} 
+}
 
 export function removeFromLocalStorage(key:string) {
 localStorage.removeItem(encodeURIComponent(key))

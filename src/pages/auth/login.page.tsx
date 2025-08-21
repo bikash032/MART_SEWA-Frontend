@@ -9,13 +9,14 @@ import FormInput from "@/components/form/FormInput";
 import { useForm } from "react-hook-form"
 
 import { yupResolver } from "@hookform/resolvers/yup"
-import { CreditionalDTO, type ICreditionals } from "@/contract/auth.contract"
+import { CreditionalDTO, IUserProfile, type ICreditionals } from "@/contract/auth.contract"
 import { useAuth } from "@/hooks/auth.hooks"
 
 const LABEL_WIDTH = "w-65"
-
 const LoginPage = () => {
-    const {login}=useAuth()
+
+    const { login } = useAuth()
+    const navigate = useNavigate()
 
     const { handleSubmit, control, formState: { errors } } = useForm({
         defaultValues: {
@@ -24,13 +25,15 @@ const LoginPage = () => {
         },
         resolver: yupResolver(CreditionalDTO)
     })
-    const navigate = useNavigate()
     const submitHandle = async (data: ICreditionals) => {
         try {
             // trigger hook
-          await  login(data)
+            let userDetail = await login(data) as IUserProfile
+            console.log("userdetails",userDetail);
+            navigate("/"+userDetail.role)
         } catch (exception) {
-            throw exception
+            console.log(exception);
+
         }
     }
     return <>
